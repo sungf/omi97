@@ -1,7 +1,6 @@
 ## example
 
-(mfei.xyz)[http://mfei.xyz]
-(mmfei.cn)[http://mmfei.cn]
+[mfei.xyz](http://mfei.xyz) or [mmfei.cn](http://mmfei.cn)
 
 ## Develop
 
