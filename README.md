@@ -35,6 +35,6 @@ npm run fix
 │  └─ index.js    //Entry js of compiler，will build to index.html
 ```
 
-## Docs
+## Tips
+难度无限增加，完成一关加一级。选择项只有6级... Infinitely increasing difficulty
 
-Cli's auto-created project scaffolding is based on a single-page create-react-app to be converted into a multi-page one, with configuration issues to see [create-react-app user guide](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md)
