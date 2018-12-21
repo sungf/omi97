@@ -9,7 +9,8 @@ define('app-777', class extends WeElement {
     return { numcount:[] }
   }
   data = {
-    intime:null
+    intime: null,
+    bossIndex:0 // 关键index
   }
   install() { // 初始化
     this.randNumCount()
@@ -19,6 +20,7 @@ define('app-777', class extends WeElement {
   }
   revNumCount = (index, nide) => { // 转换
     // console.log('index-revcount',index,nide)
+    // this.data.bossIndex=index
     this.store.revNumcount(index, nide)
     this.alertResult()
   }
@@ -77,18 +79,63 @@ define('app-777', class extends WeElement {
     }*/
     this.store.data.numcount=map
     this.store.data.si = si
+    this.data.bossIndex=map.length-1// 记录位置
     this.initNumber()
     
   }
   initNumber() { // 随机打乱
     // 随机下标 随机移动
-   
     let i = 0
-    const max=this.store.data.si*100 // 随机步数
+    const max=500 // 随机步数
     while (i < max) {
-      this.clickBox(undefined,this.getRandomInt(0,this.store.data.numcount.length))
+      this.clickBox(undefined,this.getRandomBossIndex(this.data.bossIndex))
       i++
     }
+  }
+  getRandomBossIndex(index) {
+    // 随机上下左右
+    let i = this.getRandomInt(0, 4)
+    let n=0
+    switch (i) {
+      case 0:
+        if (index >= this.store.data.si) { 
+          n = index - this.store.data.si
+          break;
+        }
+        
+      case 1:
+        if (index + this.store.data.si < this.store.data.numcount.length) {
+          n = index + this.store.data.si    
+          break;
+        }
+        
+      case 2:
+      if ((index) % this.store.data.si > 0) {
+        n = index - 1  
+        break;
+      }
+        
+      case 3:
+      if ((index) % this.store.data.si < (this.store.data.si-1)) { 
+        n = index + 1
+        break;
+      }
+        
+      default:
+      if (index >= this.store.data.si) { 
+        n = index - this.store.data.si
+      }else   if (index + this.store.data.si < this.store.data.numcount.length) {
+        n = index + this.store.data.si    
+      }else  if ((index) % this.store.data.si > 0) {
+        n = index - 1  
+      }else if ((index) % this.store.data.si < (this.store.data.si-1)) { 
+        n = index + 1
+      }
+      // n = index - this.store.data.si
+        break;
+    }
+    this.data.bossIndex=n
+    return n
   }
   getRandomInt(min, max) {
     min = Math.ceil(min);
